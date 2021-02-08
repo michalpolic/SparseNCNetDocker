@@ -39,28 +39,17 @@ RUN apt-get install -y libopenblas-dev \
     && pip3 install easydict \
     && pip3 install joblib \
     && pip3 install scikit-learn \
-    && pip3 install torch \
-    && pip3 install torchvision
+    && pip3 install torch
 
 RUN ln -s /usr/bin/python3.8 /usr/bin/python && ln -s /usr/bin/pip3 /usr/bin/pip
 
 #funguje ale moc nove: 
-RUN echo "alias pip=pip3" >>  ~/.bashrc && echo "alias python=python3" >>  ~/.bashrc && pip3 install -U MinkowskiEngine --install-option="--blas=openblas" -v      
+#RUN echo "alias pip=pip3" >>  ~/.bashrc && echo "alias python=python3" >>  ~/.bashrc && pip3 install -U MinkowskiEngine --install-option="--blas=openblas" -v      
 #RUN echo "alias pip=pip3" >>  ~/.bashrc && echo "alias python=python3" >>  ~/.bashrc && git clone -b mink-0.4.2-pytorch-1.4 https://github.com/StanfordVL/MinkowskiEngine.git && cd MinkowskiEngine && export PATH=/usr/local/cuda-11.1/bin${PATH:+:${PATH}} && export LD_LIBRARY_PATH=/usr/local/cuda-11.1/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}} && python3 setup.py install
 
 #nefunguje:
 #RUN echo "alias pip=pip3" >>  ~/.bashrc && echo "alias python=python3" >>  ~/.bashrc && pip3 install git+https://github.com/NVIDIA/MinkowskiEngine.git@v0.5
 
-#RUN export CXX=g++-7
-#RUN echo "alias pip=pip3" >>  ~/.bashrc && echo "alias python=python3" >>  ~/.bashrc \
-#    && pip3 install git+https://github.com/NVIDIA/MinkowskiEngine.git@v0.5 --install-option="--blas=openblas"
-#
-#ADD requirementsFCGF.txt .
-#RUN pip3 install -r requirementsFCGF.txt 
-
-#RUN cd home && git clone https://github.com/MIT-SPARK/TEASER-plusplus.git && cd TEASER-plusplus && mkdir build && cd build && cmake .. && make && ctest && make instal#l
-
-#RUN cd home && cd TEASER-plusplus && cd build && cmake -DCMAKE_BUILD_TYPE=Release -DTEASERPP_PYTHON_VERSION=3.6 .. && make teaserpp_python -j4 && cd python && pip3 install .
-
-#CMD python "teaserpp.py"
-CMD bash
+RUN export CXX=g++-7
+RUN echo "alias pip=pip3" >>  ~/.bashrc && echo "alias python=python3" >>  ~/.bashrc \
+    && pip3 install git+https://github.com/NVIDIA/MinkowskiEngine.git@v0.5 --install-option="--blas=openblas"
